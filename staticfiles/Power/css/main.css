@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'Tajawal';
+    src: url('../fonts/Tajawal-Regular.ttf')  format("truetype"),
+         local('Tajawal');
+  }
+  html, body{
+  direction:rtl;
+ text-align:right;
+
+  }
+  body{
+    font-family: 'Tajawal', sans-serif;
+}
+
+h1 {
+font-family: 'Tajawal', sans-serif;
+font-size: 30px;
+
+ text-align:center;
+ }
+
+p{
+font-family: 'Tajawal', sans-serif;
+ }
+  .dropdown-item {
+  text-align: center;
+
+  }
+ .bg-dark{
+background-color:#1d3557
+ !important;
+ }
+  .bg-light{
+background-color:#f1faee
+ !important;
+ }
+ .text-success{
+ color:#f67e0e !important;
+ }
+
+ .post{
+ border: 1px solid #007BFF ;
+ }
+ .btn-editing{
+ float:left;
+ }
+

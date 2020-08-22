@@ -1,0 +1,11 @@
+
+<ul class="list-group" style="padding-right:0;">
+
+{% for post in l_posts %}
+    <a href="{% url 'detail' post.slug %}" class=" bg-light text-dark"><li class="list-group-item list-post-item">{{post.title}}</li></a>
+
+{% empty %}
+    <li class="list-group-item latest-comment-item">لا يوجد مشاركات</li>
+{% endfor %}
+</ul>
+

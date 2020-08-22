@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<!-- Comment Form -->
+<div class="border p-4 mb-5 mt-4 bg-light">
+    <form method="POST">
+        <legend class="border p-4 mb-5 mt-4 bg-dark text-light">هل أنت متأكد من حذف المشاركه؟</legend>
+        {% csrf_token %}
+        <input class="btn btn-outline-danger my-2 my-sm-0" type="submit" value="حذف">
+                <a class="btn btn-outline-primary my-2 my-sm-0 text-primary" href="{% url 'detail' object.id %}">تراجع</a>
+
+
+    </form>
+</div>
+
+{% endblock content %}

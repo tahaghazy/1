@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<section>
+  <div class="row mb-4 wow fadeIn">
+
+{% for post in posts %}
+<div class="col-lg-4 col-md-6 mb-4">
+
+            <!--Card-->
+            <div class="card">
+
+              <!--Card image-->
+              <div class="view overlay">
+                <a href="{% url 'detail' post.slug %}"><div class="image-fluid text-center"><img   src="{{post.image.url}}" style=" height: 270px; width: 250px;" class="card-img-top" alt=""></div></a>
+                <a href="{% url 'detail' post.slug %}" target="_blank">
+                  <div class="mask rgba-white-slight waves-effect waves-light"></div>
+                </a>
+              </div>
+
+              <!--Card content-->
+              <div class="card-body text-center" style="
+    padding-top: 3px;
+    padding-right: 1px;
+    padding-bottom: 1px;
+    padding-left: 1px;
+">
+                <!--Title-->
+                <a class="text-dark "style="  text-decoration: none;
+" href="{% url 'detail' post.slug %} "><h5 class="card-title">{{post.title}}</h5></a>
+                <!--Text-->
+
+
+              </div>
+
+
+            </div>
+            <!--/.Card-->
+
+          </div>
+{% endfor %}
+   </div>
+</section>
+{% include 'blog/pagination.html' with page=posts %}
+
+{% endblock content %}

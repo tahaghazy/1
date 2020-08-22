@@ -1,0 +1,16 @@
+
+<ul class="list-group" style="padding-right:0;">
+
+{% for comment in l_comments %}
+    <a href="{% url 'detail' comment.post.slug %}" class=" bg-light text-dark"><li class="list-group-item list-post-item">
+    {% if comment.body|length >= 25 %}
+    {{comment.body|slice:'26 '}}..
+    {% else %}
+        {{comment.body}}
+    {% endif %}    </li></a>
+
+{% empty %}
+    <li class="list-group-item latest-comment-item">لا يوجد تعليقات</li>
+{% endfor %}
+</ul>
+
