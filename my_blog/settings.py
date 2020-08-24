@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'hitcount',
 
-
 ]
 SITE_ID = 1
 
@@ -137,4 +136,5 @@ LOGIN_URL = 'login'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 django_heroku.settings(locals())
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

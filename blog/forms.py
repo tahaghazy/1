@@ -16,3 +16,8 @@ class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content','embed_code']
+
+class ContactForm(forms.Form):
+    subject = forms.CharField(required=True,label='الاسم')
+    from_email = forms.EmailField(required=True ,label='البريد الالكتروني')
+    message = forms.CharField(widget=forms.Textarea, required=True,label='محتوي الرساله')
