@@ -61,6 +61,14 @@ class Post(models.Model):
     active = models.BooleanField(default=False,verbose_name='تفعيل')
     views = models.PositiveIntegerField(default=0,help_text='يفضل تركه فارغا',verbose_name='المشاهدات')
 
+    @property
+    def ImageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
+
 
 
     def save(self, *args, **kwargs):
