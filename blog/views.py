@@ -1,22 +1,17 @@
 from django.shortcuts import render,get_object_or_404
-from .models import Post,Comment,Category,SecondCategory
+from .models import Post,Comment,Category,SecondCategory,About
 from .forms import NewComment,PostCreateForm
 from django.core.paginator import PageNotAnInteger,Paginator,EmptyPage
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-from .filters import PostFilter
-from django.db.models import Count
-from django.views.generic import ListView , DetailView
+from .filters import *
 from django.db.models import F
 from django.db.models import Count
 from django.db.models import Q
-from django.views.generic import TemplateView, ListView
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from .forms import ContactForm
-
+from django.contrib import messages
+from .forms import FeedbackForm
 
 
 
@@ -25,7 +20,7 @@ def home(request):
     paginator = Paginator(posts, 5)
     page = request.GET.get('page')
     las_posts=Post.objects.filter(active=True)[0:5]
-    myfilter = PostFilter(request.GET,queryset=posts)
+    filter = ProductFilter(request.GET, queryset=Post.objects.all())
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
@@ -37,6 +32,7 @@ def home(request):
         'posts': posts,
         'page': page,
         'las_posts': las_posts,
+        'filter':filter
 
     }
     return render(request,'home.html',context)
@@ -191,20 +187,20 @@ def searchposts(request):
     else:
         return render(request, 'search.html')
 
-def contactView(request):
-    if request.method == 'GET':
-        form = ContactForm()
+
+
+def feedback(request):
+    if request.method == 'POST':
+        f = FeedbackForm(request.POST)
+        if f.is_valid():
+            f.save()
+            messages.add_message(request, messages.INFO, 'Feedback Submitted.')
+            return redirect('contact')
     else:
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            subject = form.cleaned_data['subject']
-            from_email = form.cleaned_data['from_email']
-            message = form.cleaned_data['message']
-            messages.success(request, 'تم ارسال الرساله بنجاح')
-            try:
-                send_mail(subject, message, from_email, ['tahaghazt164@gmail.com'])
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
-            return redirect('home')
-    return render(request, "contact-us.html", {'form': form})
+        f = FeedbackForm()
+    return render(request, 'contact-us.html', {'form': f})
+
+def about(request):
+    content = About.objects.all()
+    return render(request, 'about.html', context={'content':content})
 

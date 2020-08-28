@@ -1,5 +1,8 @@
 {% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
 {% block content %}
+
 {% if messages %}
 {% for message in messages %}
 <div class="alert alert-success">
@@ -29,16 +32,13 @@
       <!--Mask color-->
       <div class="view">
         <!--Video source-->
-        <video class="video-fluid" autoplay loop muted style="height:460px;  width: 825px;" >
-          <source src="https://mdbootstrap.com/img/video/Lines.mp4"  type="video/mp4" />
-        </video>
+        <img style="height:460px;  width: 825px;"  src="static\Power\images\dudley_opm-01.jfif">
         <div class="mask rgba-indigo-light"></div>
       </div>
 
       <!--Caption-->
       <div class="carousel-caption">
         <div class="animated fadeInDown">
-          <h3 class="text-light" style="font-size: 40px;">Welcome to P<i class="fas fa-fire-alt text-primary"></i>wer</h3>
         </div>
       </div>
       <!--Caption-->
@@ -52,8 +52,9 @@
       <div class="view">
         <!--Video source-->
     <img  class="img-fluid" src="{{post.image.url}}" style="height:460px;  width: 825px;" >
+                <div class="mask rgba-black-light"></div>
 
-        <div class="mask rgba-purple-slight"></div>
+
       </div>
 
       <!--Caption-->
@@ -82,10 +83,16 @@
   <!--/.Controls-->
 </div>
 <!--Carousel Wrapper-->
+
+  <form method="get">
+    {{ filter.form|crispy }}
+    <button class="btn btn-outline-primary my-2 my-sm-0 " type="submit">ابحث</button>
+  </form>
 <section>
+  <br/>
   <div class="row mb-4 wow fadeIn">
 
-{% for post in posts %}
+{% for post in filter.qs %}
 <div class="col-lg-4 col-md-6 mb-4">
 
             <!--Card-->
@@ -122,7 +129,6 @@
 {% endfor %}
    </div>
 </section>
-
 
 {% include 'blog/pagination.html' with page=posts %}
 

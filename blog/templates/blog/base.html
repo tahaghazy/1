@@ -20,26 +20,19 @@
 <body >
 <header>
     <nav class="navbar navbar-expand-lg  navbar navbar-dark bg-dark  ">
-  <a class="navbar-brand  " href="{% url 'home'%}"><h1 class="text-light">P<i class="fas fa-fire-alt text-primary"></i>wer</h1>
+  <a class="navbar-brand  " href="{% url 'home'%}"><h1 class="text-light">دروس السعوديه</h1>
 </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse " id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto" ">
+    <ul class="navbar-nav mr-auto" >
       <li class="nav-item active">
-        <a class="nav-link btn-outline-primary my-2 my-sm-0" href="{% url 'home'%}">الرئيسيه <span class="sr-only">(current)</span></a>
+        <a class="nav-link btn-inline-primary my-2 my-sm-0" href="{% url 'home'%}">الرئيسيه <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="btn-outline-primary my-2 my-sm-0 nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           التصنيفات
-        </a>
-        <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-          <a class="dropdown-item text-primary" href="">{{cat.title}}</a>
-          {% latest_categories %}
-
-        </div>
+<li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
       </li>
 
 
@@ -53,16 +46,23 @@
           <a class="dropdown-item text-primary" href="/newest"><i class="fas fa-clock"></i>&nbsp;&nbsp;الأحدث </a>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
+      </li>
                <li class="nav-item active">
          <a class=" nav-link btn-outline-primary my-2 my-sm-0" href="{% url 'about' %}">حول</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
       </li>
         <li class="nav-item active">
          <a class=" nav-link btn-outline-primary my-2 my-sm-0" href="{% url 'contact' %}">اتصل بنا</a>
       </li>
-{% if user.is_authenticated %}
+            </ul>
+
+             {% if user.is_authenticated %}
 
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item "><a class="nav-link text-primary" href="{% url 'new_post' %}">مشاركه جديده</a></li>
                     <li class="nav-item "><a class="nav-link text-primary" href="{% url 'profile' %}">الملف الشخصي</a></li>
                     <li class="nav-item"><a class="nav-link text-primary" href="{% url 'logout' %}">تسجيل خروج</a></li>
                 </ul>
@@ -71,17 +71,18 @@
                     <li class="nav-item"><a class="nav-link  text-primary" href="{% url 'login' %}">تسجيل دخول</a></li>
                     <li class="nav-item"><a class="nav-link  text-primary" href="{% url 'register' %}">تسجيل</a></li>
                 </ul>
-                {% endif %}
+             {% endif %}
 
 
     </ul>
     <form class="form-inline my-2 my-lg-0" action="{% url 'searchposts' %}" method="GET" value="{{request.GET.q}}">
-      <input name="q" value="{{request.GET.q}}" class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search" >
-      <button class="btn btn-outline-primary my-2 my-sm-0"  type="submit" name="submit" value="Search">Search</button>
+      <input name="q" value="{{request.GET.q}}" class="form-control mr-sm-4" type="search" placeholder="" aria-label="Search" >
+      <button class="btn btn-outline-primary my-2 my-sm-0"  type="submit" name="submit" value="Search">البحث</button>
     </form>
 
   </div>
 </nav>
+
 </header>
 <section>
   <div class="container">
@@ -129,8 +130,12 @@
 
             </h3>
             <div class="card-body text-center">
-              <h5>p<i class="fas fa-fire-alt"></i>wer</h5>
-              <p class="text-center text-dark">موقع يختص بعرض جميع الأفلام والمسلسلات مجانا وبدون اعلانات</p>
+              <h5>دروس السعوديه</h5>
+                <span>تجميع لكل الدروس موجوده في اليوتيوب
+لجميع المراحل الدراسية</span>
+                <br/>
+                                <br/>
+
               <h3><a  href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
               <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
               <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a> </h3>
@@ -146,7 +151,7 @@
 
     <div class="row p-2">
       <div class="col-md text-center">
-        <small class="text-light"> &copy; جميع الحقوق محفوظه لدي p<i class="fas fa-fire-alt"></i>wer</small>
+        <small class="text-light"> &copy; جميع الحقوق محفوظه لدي دروس السعوديه</small>
       </div>
     </div>
   </div>

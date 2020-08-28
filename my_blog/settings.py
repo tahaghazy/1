@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'user.apps.UserConfig',
     'crispy_forms',
-    'hitcount',
+    'django_filters',
+    'bootstrapform',
 
 ]
 SITE_ID = 1

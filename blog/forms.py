@@ -21,3 +21,15 @@ class ContactForm(forms.Form):
     subject = forms.CharField(required=True,label='الاسم')
     from_email = forms.EmailField(required=True ,label='البريد الالكتروني')
     message = forms.CharField(widget=forms.Textarea, required=True,label='محتوي الرساله')
+
+from .models import  Category, Post, Feedback
+from django.template.defaultfilters import slugify
+#...
+
+
+
+class FeedbackForm(forms.ModelForm):
+
+    class Meta:
+        model = Feedback
+        fields = '__all__'

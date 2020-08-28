@@ -15,12 +15,11 @@ def arabic_slugify(str):
 
 
 class Category(models.Model):
-    title = models.CharField(default='category',max_length=255, verbose_name="Title")
-    parent = models.ForeignKey('self',limit_choices_to={'parent__isnull':True}, on_delete=models.CASCADE,blank=True,null=True)
-    slug = models.SlugField(blank=True,null=True,unique=True,allow_unicode=True)
+    title = models.CharField(default='category',max_length=255, verbose_name="الصف الدراسي",help_text='قم بادخال اسم الصف الدراسي')
+    slug = models.SlugField(blank=True,null=True,unique=True,allow_unicode=True,help_text='يفضل تركه فارغا')
     class Meta:
-        verbose_name = ('Category')
-        verbose_name_plural = ('Categories')
+        verbose_name = ('الصف الدراسي')
+        verbose_name_plural = ('الصفوف الدراسيه')
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -32,12 +31,11 @@ class Category(models.Model):
         return self.title
 
 class SecondCategory(models.Model):
-    title = models.CharField(default='SecondCategory',max_length=255, verbose_name="Title")
-    parent = models.ForeignKey('self',limit_choices_to={'parent__isnull':True}, on_delete=models.CASCADE,blank=True,null=True)
-    slug = models.SlugField(blank=True,null=True,unique=True,allow_unicode=True)
+    title = models.CharField(default='SecondCategory',max_length=255, verbose_name="الفصل الدراسي",help_text='قم بادخال اسم الفصل الدراسي')
+    slug = models.SlugField(blank=True,null=True,unique=True,allow_unicode=True,help_text='يفضل تركه فارغا')
     class Meta:
-        verbose_name = ('SecondCategory')
-        verbose_name_plural = ('SecondCategories')
+        verbose_name = ('الفصل الدراسي')
+        verbose_name_plural = ('الفصول الدراسيه')
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -49,19 +47,19 @@ class SecondCategory(models.Model):
         return self.title
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
-    content = models.TextField()
-    rate = models.FloatField(max_length=3,null=True,blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE,blank=True,null=True,related_name='posts')
-    second_category = models.ManyToManyField(SecondCategory,blank=True,related_name='posts')
-    slug = models.SlugField(blank=True,null=True,unique=True,allow_unicode=True)
-    post_date = models.DateTimeField(default=timezone.now)
+    title = models.CharField(max_length=100,verbose_name='العنوان',help_text='قم بادخال عنوان الدرس')
+    content = models.TextField(verbose_name='الوصف',help_text='قم بادخال الوصف')
+    rate = models.FloatField(max_length=3,null=True,blank=True,verbose_name='التقيم',help_text='قم بادخال تقييم الدرس')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,blank=True,null=True,related_name='posts', verbose_name="الصف الدراسي",help_text='قم باختيار اسم الصف الدراسي')
+    second_category = models.ForeignKey(SecondCategory, on_delete=models.CASCADE,blank=True,null=True,related_name='posts', verbose_name="الفصل الدراسي",help_text='قم باختيار  الفصل الدراسي')
+    slug = models.SlugField(blank=True,null=True,unique=True,allow_unicode=True,help_text='يفضل تركه فارغا')
+    post_date = models.DateTimeField(default=timezone.now,help_text='يفضل تركه كما هو',verbose_name='تاريخ الدرس')
     post_update = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    embed_code = models.CharField(max_length=300, blank=True)
-    image = models.ImageField(default="profile_pics/def.jpg" ,upload_to='profile_pics' , blank=True)
-    active = models.BooleanField(default=False)
-    views = models.PositiveIntegerField(default=0)
+    author = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name='المستخدم')
+    embed_code = models.CharField(max_length=300, blank=True,help_text='(قم بلصق كود التضمين لعرض المحتوي الذي تريده(فيديو يوتيوب',verbose_name='رابط التضمين')
+    image = models.ImageField(default="profile_pics/def.jpg" ,upload_to='profile_pics' , blank=True,verbose_name='الصوره')
+    active = models.BooleanField(default=False,verbose_name='تفعيل')
+    views = models.PositiveIntegerField(default=0,help_text='يفضل تركه فارغا',verbose_name='المشاهدات')
 
 
 
@@ -86,6 +84,8 @@ class Post(models.Model):
 
     class Meta:
         ordering = ('-post_date',)
+        verbose_name = ('المنشور')
+        verbose_name_plural = ('المنشورات')
 
 
 class Post_Altermative(models.Model):
@@ -112,7 +112,29 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('-comment_date',)
+        verbose_name = ('التعليق')
+        verbose_name_plural = ('التعليقات')
 
+class Feedback(models.Model):
+    name = models.CharField(max_length=200, help_text="اسم المرسل")
+    email = models.EmailField(max_length=200)
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name_plural = "الرسائل"
+
+    def __str__(self):
+        return self.message
+
+class About(models.Model):
+    content = models.TextField()
+    def __str__(self):
+        return self.content
+
+    class Meta:
+        verbose_name = ('وصف الموقع')
+        verbose_name_plural = ('وصف الموقع')
 
 
