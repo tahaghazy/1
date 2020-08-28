@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'crispy_forms',
     'django_filters',
-    'bootstrapform',
 
 ]
 SITE_ID = 1

@@ -14,7 +14,6 @@ distlib==0.3.1
 dj-database-url==0.5.0
 Django==3.0.9
 django-admin-interface==0.13.2
-django-bootstrap-form==3.4
 django-colorfield==0.3.2
 django-crispy-forms==1.9.2
 django-etc==1.2.0
