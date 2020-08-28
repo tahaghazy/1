@@ -77,11 +77,7 @@ class Post(models.Model):
             if not self.slug:
                 self.slug = arabic_slugify(self.title)
         super(Post,self).save(*args, **kwargs)
-        img = Image.open(self.image.path)
-        if img.width > 650:
-            output_size = (650,650)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+
 
 
     def __str__(self):
