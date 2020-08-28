@@ -91,6 +91,7 @@
 <section>
   <br/>
   <div class="row mb-4 wow fadeIn">
+<div class="border p-3 mb-4 text-center bg-light">
 
 {% for post in filter.qs %}
 <div class="col-lg-4 col-md-6 mb-4">
@@ -128,6 +129,7 @@
           </div>
 {% endfor %}
    </div>
+    <div/>
 </section>
 
 {% include 'blog/pagination.html' with page=posts %}
