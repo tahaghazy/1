@@ -6,5 +6,7 @@ admin.site.register(Category)
 admin.site.register(SecondCategory)
 admin.site.register(Comment)
 admin.site.register(About)
+admin.site.register(Scripts)
+
 
 

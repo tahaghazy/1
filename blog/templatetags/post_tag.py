@@ -1,5 +1,5 @@
 from django import template
-from blog.models import Post, Comment, SecondCategory
+from blog.models import Post, Comment, SecondCategory,Scripts
 from django.shortcuts import render,get_object_or_404
 
 
@@ -25,5 +25,13 @@ def latest_categories():
 
     context = {
         'l_categorie': SecondCategory.objects.all(),
+    }
+    return context
+
+@register.inclusion_tag('scripts.html')
+def scripts():
+
+    context = {
+        'scripts': Scripts.objects.all(),
     }
     return context

@@ -120,7 +120,7 @@ class Comment(models.Model):
         verbose_name_plural = ('التعليقات')
 
 class Feedback(models.Model):
-    name = models.CharField(max_length=200, help_text="اسم المرسل")
+    name = models.CharField(max_length=200, verbose_name="اسم المرسل")
     email = models.EmailField(max_length=200)
     subject = models.CharField(max_length=200)
     message = models.TextField()
@@ -142,3 +142,13 @@ class About(models.Model):
         verbose_name_plural = ('وصف الموقع')
 
 
+
+
+class Scripts(models.Model):
+    title = models.CharField(max_length=100,verbose_name='اسم السكربت ')
+    script = models.TextField(verbose_name='السكربت',help_text='(قم باضافة السكربت الذي تريده هنا مثل(كود تفعيل ادسنس ')
+    def __str__(self):
+        return self.title
+    class Meta:
+        verbose_name = ('اضافة سكربت للموقع')
+        verbose_name_plural = ('اضافة سكربت للموقع')

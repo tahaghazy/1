@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from .models import Post,Comment,Category,SecondCategory,About
+from .models import Post,Comment,Category,SecondCategory,About,Scripts
 from .forms import NewComment,PostCreateForm
 from django.core.paginator import PageNotAnInteger,Paginator,EmptyPage
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -85,7 +85,7 @@ def movies(request,slug):
     #myfilter = PostFilter(request.GET, queryset=post)
     #post = myfilter.qs
     context = {
-        'title':'movies',
+        'title':'التصنيفات',
         'post': post,
         'categories':categories
         #'myfilter': myfilter,
@@ -101,7 +101,7 @@ def secondcategory(request,slug):
     #myfilter = PostFilter(request.GET, queryset=post)
     #post = myfilter.qs
     context = {
-        'title':'category',
+        'title':'التصنيفات',
         'post': post,
         'categories':categories
         #'myfilter': myfilter,
@@ -198,9 +198,14 @@ def feedback(request):
             return redirect('contact')
     else:
         f = FeedbackForm()
-    return render(request, 'contact-us.html', {'form': f})
+    return render(request, 'contact-us.html', {'title':'اتصل بنا','form': f})
 
 def about(request):
     content = About.objects.all()
-    return render(request, 'about.html', context={'content':content})
+    context={'title':' حول',
+             'content':content
+             }
+    return render(request, 'about.html', context)
+
+
 
