@@ -5,4 +5,4 @@ from .models import Post
 class ProductFilter(django_filters.FilterSet):
     class Meta:
         model = Post
-        fields = ['second_category','category']
+        fields = ['second_category','category','third_category']

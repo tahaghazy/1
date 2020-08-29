@@ -4,6 +4,7 @@ from .models import *
 admin.site.register(Post)
 admin.site.register(Category)
 admin.site.register(SecondCategory)
+admin.site.register(ThirdCategory)
 admin.site.register(Comment)
 admin.site.register(About)
 admin.site.register(Scripts)

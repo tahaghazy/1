@@ -20,7 +20,7 @@ def home(request):
     paginator = Paginator(posts, 5)
     page = request.GET.get('page')
     las_posts=Post.objects.filter(active=True)[0:5]
-    filter = ProductFilter(request.GET, queryset=Post.objects.all())
+    filter = ProductFilter(request.GET, queryset=Post.objects.filter(active = True))
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
