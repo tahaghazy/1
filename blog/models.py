@@ -47,11 +47,11 @@ class SecondCategory(models.Model):
         return self.title
 
 class ThirdCategory(models.Model):
-    title = models.CharField(default='الموضوع',max_length=255, verbose_name="الموضوع",help_text='قم بادخال اسم  الموضوع')
+    title = models.CharField(default='الماده',max_length=255, verbose_name="الماده",help_text='قم بادخال اسم  الماده')
     slug = models.SlugField(blank=True,null=True,unique=True,allow_unicode=True,help_text='يفضل تركه فارغا')
     class Meta:
-        verbose_name = ('الموضوع')
-        verbose_name_plural = ('المواضيع')
+        verbose_name = ('الماده')
+        verbose_name_plural = ('المواد')
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -62,14 +62,30 @@ class ThirdCategory(models.Model):
     def __str__(self):
         return self.title
 
+class FourthCategory(models.Model):
+    title = models.CharField(default='المرحله',max_length=255, verbose_name="المرحله الدراسيه",help_text='قم بادخال اسم المرحلة الدراسيه')
+    slug = models.SlugField(blank=True,null=True,unique=True,allow_unicode=True,help_text='يفضل تركه فارغا')
+    class Meta:
+        verbose_name = ('المرحله الدراسيه')
+        verbose_name_plural = ('المراحل الدراسيه')
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+            if not self.slug:
+                self.slug = arabic_slugify(self.title)
+        super(FourthCategory,self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
 
 class Post(models.Model):
     title = models.CharField(max_length=100,verbose_name='العنوان',help_text='قم بادخال عنوان الدرس')
     content = models.TextField(verbose_name='الوصف',help_text='قم بادخال الوصف')
     rate = models.FloatField(max_length=3,null=True,blank=True,verbose_name='التقيم',help_text='قم بادخال تقييم الدرس')
+    fourth_category = models.ForeignKey(FourthCategory, on_delete=models.CASCADE,blank=True,null=True,related_name='posts', verbose_name="المرحله الدراسيه",help_text='قم باختيار اسم  المرحله الدراسيه')
     category = models.ForeignKey(Category, on_delete=models.CASCADE,blank=True,null=True,related_name='posts', verbose_name="الصف الدراسي",help_text='قم باختيار اسم الصف الدراسي')
     second_category = models.ForeignKey(SecondCategory, on_delete=models.CASCADE,blank=True,null=True,related_name='posts', verbose_name="الفصل الدراسي",help_text='قم باختيار  الفصل الدراسي')
-    third_category = models.ForeignKey(ThirdCategory, on_delete=models.CASCADE,blank=True,null=True,related_name='posts', verbose_name="الموضوع",help_text='قم باختيار اسم  الموضوع')
+    third_category = models.ForeignKey(ThirdCategory, on_delete=models.CASCADE,blank=True,null=True,related_name='posts', verbose_name="الماده ",help_text='قم باختيار اسم  الماده')
     slug = models.SlugField(blank=True,null=True,unique=True,allow_unicode=True,help_text='يفضل تركه فارغا')
     post_date = models.DateTimeField(default=timezone.now,help_text='يفضل تركه كما هو',verbose_name='تاريخ الدرس')
     post_update = models.DateTimeField(auto_now=True)
