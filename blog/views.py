@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from .models import Post,Comment,Category,SecondCategory,About,Scripts
+from .models import *
 from .forms import NewComment,PostCreateForm
 from django.core.paginator import PageNotAnInteger,Paginator,EmptyPage
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -17,22 +17,25 @@ from .forms import FeedbackForm
 
 def home(request):
     posts = Post.objects.filter(active=True)
-    paginator = Paginator(posts, 5)
-    page = request.GET.get('page')
+
     las_posts=Post.objects.filter(active=True)[0:5]
     filter = ProductFilter(request.GET, queryset=Post.objects.filter(active = True))
+    fo = filter.qs
+    paginator = Paginator(fo, 6)
+    page = request.GET.get('page')
     try:
-        posts = paginator.page(page)
+        fo = paginator.page(page)
     except PageNotAnInteger:
-        posts = paginator.page(1)
+        fo = paginator.page(1)
     except EmptyPage:
-        posts = paginator.page(paginator.num_page)
+        fo = paginator.page(paginator.num_page)
     context = {
         'title': 'الصفحة الرئيسية',
         'posts': posts,
         'page': page,
         'las_posts': las_posts,
-        'filter':filter
+        'filter':filter,
+        'fo':fo
 
     }
     return render(request,'home.html',context)
