@@ -90,7 +90,7 @@ class Post(models.Model):
     post_date = models.DateTimeField(default=timezone.now,help_text='يفضل تركه كما هو',verbose_name='تاريخ الدرس')
     post_update = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name='المستخدم')
-    embed_code = models.CharField(max_length=300, blank=True,help_text='(قم بلصق كود التضمين لعرض المحتوي الذي تريده(فيديو يوتيوب',verbose_name='رابط التضمين')
+    embed_code = models.CharField(max_length=300, blank=True,help_text='(قم بلصق معرف   الفيديو الذي تريده(فيديو يوتيوب',verbose_name='معرف الفيديو')
     image = models.ImageField(default="profile_pics/def.jpg" ,upload_to='profile_pics' , blank=True,verbose_name='الصوره')
     active = models.BooleanField(default=False,verbose_name='تفعيل')
     views = models.PositiveIntegerField(default=0,help_text='يفضل تركه فارغا',verbose_name='المشاهدات')
