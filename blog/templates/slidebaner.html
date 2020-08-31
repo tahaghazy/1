@@ -1,0 +1,7 @@
+{% for script in slidebaner %}
+{{ my_text_with_html|safe }}
+{% autoescape off %}
+{{script.script}}
+
+{% endautoescape %}
+{% endfor %}

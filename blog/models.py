@@ -187,3 +187,21 @@ class Scripts(models.Model):
     class Meta:
         verbose_name = ('اضافة سكربت للموقع')
         verbose_name_plural = ('اضافة سكربت للموقع')
+
+class Banner(models.Model):
+    title = models.CharField(max_length=100,verbose_name='اسم السكربت ')
+    script = models.TextField(verbose_name='السكربت',help_text='(قم باضافة السكربت الذي تريده هنا مثل(كود تفعيل ادسنس ')
+    def __str__(self):
+        return self.title
+    class Meta:
+        verbose_name = ('اضافة بانر ')
+        verbose_name_plural = ('اضافة بانر ')
+
+class SlideBanner(models.Model):
+    title = models.CharField(max_length=100,verbose_name='اسم السكربت ')
+    script = models.TextField(verbose_name='السكربت',help_text='(قم باضافة السكربت الذي تريده هنا مثل(كود تفعيل ادسنس ')
+    def __str__(self):
+        return self.title
+    class Meta:
+        verbose_name = ('اضافة بانر جانبي')
+        verbose_name_plural = ('اضافة بانر جانبي')

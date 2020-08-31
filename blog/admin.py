@@ -9,6 +9,9 @@ admin.site.register(FourthCategory)
 admin.site.register(Comment)
 admin.site.register(About)
 admin.site.register(Scripts)
+admin.site.register(Banner)
+admin.site.register(SlideBanner)
+
 
 
 

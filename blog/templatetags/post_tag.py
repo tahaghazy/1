@@ -1,5 +1,5 @@
 from django import template
-from blog.models import Post, Comment, SecondCategory,Scripts
+from blog.models import Post, Comment, SecondCategory,Scripts,SlideBanner,Banner
 from django.shortcuts import render,get_object_or_404
 
 
@@ -33,5 +33,20 @@ def scripts():
 
     context = {
         'scripts': Scripts.objects.all(),
+    }
+    return context
+
+@register.inclusion_tag('baner.html')
+def baner():
+
+    context = {
+        'baner': Banner.objects.all(),
+    }
+    return context
+@register.inclusion_tag('slidebaner.html')
+def slidebaner():
+
+    context = {
+        'slidebaner': SlideBanner.objects.all(),
     }
     return context
