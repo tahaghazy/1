@@ -1,0 +1,14 @@
+
+
+
+
+<ul class="list-group" style="padding-right:0;">
+
+{% for cat in l_categorie %}
+          <a class="dropdown-item text-primary" href="{% url 'secondcategory' cat.slug %}">{{cat.title}}</a>
+
+{% empty %}
+    <li class="list-group-item latest-comment-item">لا يوجد تصنيفات</li>
+{% endfor %}
+</ul>
+

@@ -1,37 +1,13 @@
 {% extends 'blog/base.html' %}
-{% load crispy_forms_tags %}
-
 {% block content %}
-
-{% if messages %}
-{% for message in messages %}
-<div class="alert alert-success">
-    {{message}}
-</div>
-{% endfor %}
-{% endif %}
-
-<h3 class="card border-bottom mt-6 mb-3 bg-dark text-light p-2">المشاركات</h3>
-                     {% baner %}
-
-
-<div class="border p-3 mb-4 mt-3 text-center bg-light">
-
-  <form method="get">
-    {{ filter.form|crispy }}
-    <button class="btn btn-outline-primary my-2 my-sm-0 " type="submit">ابحث</button>
-  </form>
-                </div>
-
 <section>
-  <br/>
   <div class="row mb-4 wow fadeIn">
 
-{% for post in fo %}
+{% for post in posts %}
 <div class="col-lg-4 col-md-6 mb-4">
 
             <!--Card-->
-            <div class="card">
+             <div class="card">
 
               <!--Card image-->
               <div class="view overlay">
@@ -58,13 +34,11 @@
 
 
             </div>
-            <!--/.Card-->
 
           </div>
 {% endfor %}
    </div>
 </section>
-
-{% include 'blog/pagination.html' with page=fo %}
+{% include 'blog/pagination.html' with page=posts %}
 
 {% endblock content %}
