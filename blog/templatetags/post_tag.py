@@ -1,5 +1,5 @@
 from django import template
-from blog.models import Post, Comment, SecondCategory,Scripts,SlideBanner,Banner
+from blog.models import Post, Comment, SecondCategory,Scripts,SlideBanner,Banner,Links
 from django.shortcuts import render,get_object_or_404
 
 
@@ -48,5 +48,13 @@ def slidebaner():
 
     context = {
         'slidebaner': SlideBanner.objects.all(),
+    }
+    return context
+
+@register.inclusion_tag('links.html')
+def links():
+
+    context = {
+        'links': Links.objects.all(),
     }
     return context

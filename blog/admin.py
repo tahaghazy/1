@@ -11,6 +11,7 @@ admin.site.register(About)
 admin.site.register(Scripts)
 admin.site.register(Banner)
 admin.site.register(SlideBanner)
+admin.site.register(Links)
 
 
 

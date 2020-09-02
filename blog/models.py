@@ -205,3 +205,12 @@ class SlideBanner(models.Model):
     class Meta:
         verbose_name = ('اضافة بانر جانبي')
         verbose_name_plural = ('اضافة بانر جانبي')
+
+class Links(models.Model):
+    title = models.CharField(max_length=100,verbose_name='اسم الموقع ')
+    script = models.URLField(verbose_name='الرابط',help_text='قم باضافة رابط الموقع الذي تريد عرضه اسفل الموقع ')
+    def __str__(self):
+        return self.title
+    class Meta:
+        verbose_name = ('اضافة رابط للموقع')
+        verbose_name_plural = ('اضافة رابط للموقع')
