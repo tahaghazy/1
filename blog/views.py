@@ -17,12 +17,7 @@ from .forms import FeedbackForm
 
 def home(request):
     posts = Post.objects.filter(active=True)
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
 
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
     las_posts=Post.objects.filter(active=True)[0:5]
     filter = ProductFilter(request.GET, queryset=Post.objects.filter(active = True))
     fo = filter.qs
@@ -40,8 +35,7 @@ def home(request):
         'page': page,
         'las_posts': las_posts,
         'filter':filter,
-        'fo':fo,
-        'ip': ip
+        'fo':fo
 
     }
     return render(request,'home.html',context)
